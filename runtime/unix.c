@@ -427,6 +427,19 @@ char *caml_secure_getenv (char const *var)
 #endif
 }
 
+int caml_putenv(char_os const *var, char_os const *value)
+{
+  char_os * s;
+  int ret;
+
+  s = caml_stat_strconcat_os(3, var, T("="), value);
+  ret = putenv_os(s);
+  if (ret == -1) {
+    caml_stat_free(s);
+  }
+  return ret;
+}
+
 int caml_num_rows_fd(int fd)
 {
 #ifdef TIOCGWINSZ

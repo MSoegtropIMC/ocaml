@@ -709,6 +709,19 @@ wchar_t *caml_secure_getenv (wchar_t const *var)
   return _wgetenv(var);
 }
 
+int caml_putenv(char_os const *var, char_os const *value)
+{
+  char_os * s;
+  int ret;
+
+  s = caml_stat_strconcat_os(3, var, T("="), value);
+  ret = putenv_os(s);
+  if (ret == -1) {
+    caml_stat_free(s);
+  }
+  return ret;
+}
+
 /* caml_win32_getenv is used to implement Sys.getenv and Unix.getenv in such a
    way that they get direct access to the Win32 environment rather than to the
    copy that is cached by the C runtime system. The result of caml_win32_getenv

@@ -185,6 +185,7 @@ void caml_debugger_init(void)
   if (address == NULL) return;
   if (dbg_addr != NULL) caml_stat_free(dbg_addr);
   dbg_addr = address;
+  caml_putenv(T("CAML_DEBUG_SOCKET"),T(""));
 
 #ifdef _WIN32
   winsock_startup();

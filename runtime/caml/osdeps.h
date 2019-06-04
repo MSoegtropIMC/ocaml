@@ -100,6 +100,11 @@ extern char_os * caml_executable_name(void);
 */
 extern char_os *caml_secure_getenv(char_os const *var);
 
+/* Modify or delete environment variable.
+   Returns 0 on success or an error code.
+*/
+extern int caml_putenv(char_os const *var, char_os const *value);
+
 /* If [fd] refers to a terminal or console, return the number of rows
    (lines) that it displays.  Otherwise, or if the number of rows
    cannot be determined, return -1. */
